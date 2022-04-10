@@ -4,7 +4,7 @@ import subprocess
 import shutil
 
 root_dir = Path(__file__).parent.parent.parent
-version = "svkj-5"
+version = "svkj-6"
 rockspec_file = root_dir.joinpath(f"cyan-{version}.rockspec")
 
 def init_lua_rocks():
@@ -36,8 +36,8 @@ def lua_rocks_make():
 def create_rock():
     lua_rocks_make()
     print("======= Running create_rock ===========")
-    subprocess.run(["./luarocks", "pack", rockspec_file], cwd=root_dir, check=True)
-    rock_file = root_dir.joinpath(f"cyan-{version}.src.rock")
+    subprocess.run(["./luarocks", "pack", "cyan"], cwd=root_dir, check=True)
+    rock_file = root_dir.joinpath(f"cyan-{version}.all.rock")
     assert rock_file.exists()
     print("=======================")
     print(f"SUCCESS - rock file created at {rock_file}")
