@@ -4,7 +4,7 @@ import subprocess
 import shutil
 
 root_dir = Path(__file__).parent.parent.parent
-version = "svkj-6"
+version = "svkj-7"
 rockspec_file = root_dir.joinpath(f"cyan-{version}.rockspec")
 
 def init_lua_rocks():
