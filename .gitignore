@@ -5,3 +5,10 @@ tmp/
 /.luarocks
 /luarocks
 /lua
+
+build
+
+*.rockspec
+!cyan-dev-1.rockspec
+
+*.rock

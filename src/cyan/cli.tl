@@ -48,6 +48,13 @@ parser:option("--gen-compat", "Generate compatibility code for targeting differe
       :default("optional")
       :defmode("a")
 
+parser:option("--display-type", "Whether the output should target humans or computers.  When parsing the output from script, using 'plumbing', and when displaying to user, use 'porcelain'")
+      :choices({ "porcelain", "plumbing" })
+      :default("porcelain")
+      :action(function(_: argparse.Args, __: string, val: string|boolean|{string})
+         log.set_display_type(val as log.DisplayType)
+      end)
+
 parser:option("--gen-target", "Minimum targeted Lua version for generated code.")
       :choices({ "5.1", "5.3" })
 

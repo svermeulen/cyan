@@ -1,0 +1,10 @@
+#!/bin/bash
+set -ex
+cd `dirname $BASH_SOURCE`/..
+ROOT_DIR=`pwd`
+export LUA_PATH="$ROOT_DIR/lua_modules/share/lua/5.4/?.lua;$ROOT_DIR/lua_modules/share/lua/5.4/?/init.lua;/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua;/usr/local/lib/lua/5.4/?.lua;/usr/local/lib/lua/5.4/?/init.lua;./?.lua;./?/init.lua"
+export LUA_CPATH="$ROOT_DIR/lua_modules/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/?.so;/usr/local/lib/lua/5.4/loadall.so;./?.so"
+export PATH="$ROOT_DIR/lua_modules/bin:$PATH"
+cd ./svkj
+poetry install
+poetry run $1

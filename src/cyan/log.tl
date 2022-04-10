@@ -50,6 +50,11 @@ local enum Verbosity
    "debug"
 end
 
+local enum DisplayType
+   "plumbing"
+   "porcelain"
+end
+
 local verbosities <const>: {Verbosity} = {
    "quiet",
    "normal",
@@ -64,6 +69,7 @@ local verbosity_to_int <const>: {Verbosity:integer} = {
 }
 
 local verbosity: Verbosity = "normal"
+local display_type: DisplayType = "porcelain"
 
 local inspect: function(any): string
 do
@@ -138,6 +144,10 @@ local function create_logger(
    local sanitize <const> = sanitizer(stream)
    local threshold <const> = verbosity_threshold and verbosity_to_int[verbosity_threshold] or -math.huge
    return function(...: any)
+      if display_type == "plumbing" then
+         return
+      end
+
       if verbosity_to_int[verbosity] < threshold then return end
 
       stream:write(tostring(sanitize(str.pad_left(prefix, max_prefix_len))))
@@ -157,6 +167,14 @@ end
 
 local function set_verbosity(level: Verbosity)
    verbosity = level
+end
+
+local function set_display_type(value: DisplayType)
+   display_type = value
+end
+
+local function get_display_type():DisplayType
+   return display_type
 end
 
 local log <const> = {
@@ -193,8 +211,11 @@ local log <const> = {
    ),
    create_logger = create_logger,
    set_verbosity = set_verbosity,
+   set_display_type = set_display_type,
+   get_display_type = get_display_type,
    verbosities = verbosities,
    Verbosity = Verbosity,
+   DisplayType = DisplayType,
 }
 
 return log

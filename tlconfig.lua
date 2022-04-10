@@ -1,10 +1,11 @@
 return {
-   build_dir = "tmp",
+   build_dir = "build",
    source_dir = "src",
    include_dir = { "src" },
 
    warning_error = { "unused", "redeclaration" },
 
+   global_env_def = "globals",
    gen_compat = "required",
 
    scripts = {
